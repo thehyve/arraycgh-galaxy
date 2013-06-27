@@ -1,11 +1,17 @@
 aCGH tools from Chipster can be found in folder "Chipster"
 
-Chipster/Rscripts_originals:	Contains original R scripts from Chipster
-Chipster/Rscripts:				Contains R scripts as adapted for Galaxy
-Chipster/*.xml:					Tool wrappers for Galaxy Tools, status of tools is indicated in <description> tag (TODO/TOTEST/TESTED)
-Chipster/ *.py:					Helper code to display column names in Galaxy wrapper instead of "c1,c2,.." (see for example tool acgh13-plot-survival.xml for usage)
+Chipster/Rscripts_originals:
+  --> Contains original R scripts from Chipster
+Chipster/Rscripts:
+  --> Contains R scripts as adapted for Galaxy
+Chipster/*.xml:	
+  --> Tool wrappers for Galaxy Tools, status of tools is indicated in <description> tag (TODO/TOTEST/TESTED)
+Chipster/ *.py:
+  --> Helper code to display column names in Galaxy wrapper instead of "c1,c2,.." 
+      (see for example tool acgh13-plot-survival.xml for usage)
 
 TODO:
-  xml files contain one hard-coded address: <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
-       --> should be changed to using .loc file for better portability
+xml files contain one hard-coded address: 
+  --> <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
+  --> should be changed to using .loc file for better portability
 
