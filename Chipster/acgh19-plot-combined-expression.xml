@@ -1,0 +1,23 @@
+<tool id="acgh19" name="19: Plot copy-number-induced gene expression" version="1">
+
+  <description>TODO</description> 
+
+  <command> 
+		
+  </command>
+
+  <outputs>
+	
+  </outputs>
+  
+  <inputs>
+	
+
+  </inputs>
+  
+  <help>
+  
+**What it does**
+		
+  </help>
+</tool>

@@ -1,0 +1,53 @@
+<tool id="acgh13" name="13: Plot survival curves for called copy number data" version="1">
+
+  <description>TOTEST</description> 
+
+   <command> <!-- TODO: loc file instead of hardcoded! -->
+		Rscript /mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts/acgh13-plot-survival.R $scriptsdir $inputfile $phenodata "$go.survivalcolumn" "$go.statuscolumn" $aberrations $cintervals 2>&amp;1
+  </command>
+  
+  <code file="getcolumnnames.py"/>
+  
+	
+  <inputs>
+    <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
+
+	<param name="inputfile" type="data" label="Select input file (survival test)"/> 
+    <param name="phenodata" type="data" label="Select phenodata file "/>
+	<conditional name="go">
+			<param name="ready" type="select"  label="Ready to select survival and status columns?"  help="Set to NO and back to YES after making changes to above parameters">
+				<option value="no" selected="True">no</option>
+				<option value="yes">yes</option>	
+			</param>
+			
+		<when value="yes">				
+				<param name="survivalcolumn"   type="select" dynamic_options="get_headers(phenodata)"  multiple="false" label="Select Survival Column"  help="Phenodata column with survival data" /> 
+				<param name="statuscolumn"     type="select" dynamic_options="get_headers(phenodata)"  multiple="false" label="Select Status Column"    help="Phenodata column with patient status: alive=0, dead=1" /> 				
+   		</when>
+	</conditional>
+    
+
+	 <param name="aberrations" type="select" label="Test for aberrations" help="Whether to test only for gains or losses, or both.">
+		<option value="gains"> Gains </option>
+		<option value="losses"> Losses </option>
+		<option value="both"> Both </option>
+	</param>	
+	<param name="cintervals" type="select" label="Plot confidence intervals?" >
+		<option value="yes"> Yes </option>
+		<option value="no" selected="true"> No </option>	
+	</param>	
+
+  </inputs>	
+
+  <outputs>
+	<data format="pdf" name="survivalplot" from_work_dir="survival.pdf" label="aCGH: 13 Plot of Survival test on ${on_string}"/>
+
+  </outputs>
+  
+  <help>
+  
+**What it does**
+	
+Generate plots with survival curves for called copy number data	
+  </help>
+</tool>

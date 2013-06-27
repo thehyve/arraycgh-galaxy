@@ -1,0 +1,31 @@
+<tool id="acgh5" name="5: Smooth waves from normalized aCGH data" version="1">
+
+  <description>TOTEST</description> 
+
+  <command> <!-- TODO: loc file instead of hardcoded! -->
+		Rscript /mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts/acgh5-smooth-waves.R $scriptsdir $tumourfile $calibfile 2>&amp;1
+  </command>
+
+  <inputs>
+    <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
+
+	<param name="inputfile" type="data" label="Select input file (normalized_tumor.tsv)"/>
+	<param name="inputfile" type="data" label="Select calibration file (normalized_calib.tsv)"/>
+
+
+  
+  </inputs>	
+
+  <outputs>
+	<data format="tabular" name="smoothed" from_work_dir="smoothed.tsv" label="aCGH: 5 Smoothing on ${on_string}"/>
+  </outputs>
+  
+  
+  <help>
+  
+**What it does**
+
+
+		
+  </help>
+</tool>

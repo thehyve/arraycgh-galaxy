@@ -1,0 +1,54 @@
+<tool id="acgh12" name="12: Survival test for called copy number data" version="1">
+
+  <description>TESTED</description> 
+
+   <command> <!-- TODO: loc file instead of hardcoded! -->
+		Rscript /mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts/acgh12-survival-test.R $scriptsdir $inputfile $phenodata "$go.survivalcolumn" "$go.statuscolumn"" $permutations $aberrations 2>&amp;1
+  </command>
+
+  <code file="getcolumnnames.py"/>
+	
+  <inputs>
+    <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
+
+	<param name="inputfile" type="data" label="Select input file (regions data)"/> 
+    <param name="phenodata" type="data" label="Select phenodata file "/>
+<!--
+    <param name="survivalcolumn"     type="data_column"   data_ref="phenodata" multiple="False" label="Select Survival Column"  help="Phenodata column with survival data  (TODO: display column names?)" /> 
+    <param name="statuscolumn"     type="data_column"   data_ref="phenodata" multiple="False" label="Select Status Column"  help="Phenodata column with patient status: alive=0, dead=1  (TODO: display column names?)" />  
+--> 
+	<conditional name="go">
+			<param name="ready" type="select"  label="Ready to select survival and status columns?"  help="Set to NO and back to YES after making changes to above parameters">
+				<option value="no" selected="True">no</option>
+				<option value="yes">yes</option>	
+			</param>
+			
+		<when value="yes">	
+				<param name="survivalcolumn"   type="select" dynamic_options="get_headers(phenodata)"  multiple="False" label="Select Survival Column"  help="Phenodata column with survival data" /> 
+				<param name="statuscolumn"     type="select" dynamic_options="get_headers(phenodata)"  multiple="False" label="Select Status Column"    help="Phenodata column with patient status: alive=0, dead=1" /> 
+   		</when>
+	</conditional>
+
+
+	<param name="permutations" type="text" value="10000" label="Number of Permutations" help="The number of permutations. At least 10000 recommended for final calculations."/>	
+    <param name="aberrations" type="select" label="Test for aberrations" help="Whether to test only for gains or losses, or both.">
+		<option value="1"> Gains </option>
+		<option value="-1"> Losses </option>
+		<option value="0"> Both </option>
+	</param>	
+
+  </inputs>	
+
+  <outputs>
+	<data format="tabular" name="survivaltest" from_work_dir="survival-test.tsv" label="aCGH: 12 Survival test on ${on_string}"/>
+
+  </outputs>
+  
+  
+  <help>
+  
+**What it does**
+
+Statistical test for survival and called copy number data. The testing is recommended to be performed after running the *Identify common regions from called copy number data* tool.		
+  </help>
+</tool>

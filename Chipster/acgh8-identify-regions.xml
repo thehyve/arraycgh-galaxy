@@ -1,0 +1,33 @@
+<tool id="acgh8" name="8: Identify common regions from called copy number data" version="1">
+
+  <description>TESTED</description> 
+
+   <command> <!-- TODO: loc file instead of hardcoded! -->
+		Rscript /mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts/acgh8-identify-regions.R $scriptsdir $inputfile $maxinfoloss 2>&amp;1
+  </command>
+
+  <inputs>
+    <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
+
+	<param name="inputfile" type="data" label="Select input file (aberrations data)"/> 
+
+	<param name="maxinfoloss" type="text" value="0.01" label="Maximum info loss"  help="Maximal information loss allowed.(value between 0 and 1). Recommended for high-resolution platforms (equal or above 44K), threshold=0.001"/>
+    
+	
+    
+     
+  </inputs>	
+
+  <outputs>
+	<data format="tabular" name="regions" from_work_dir="regions.tsv" label="aCGH: 8 Regions on ${on_string}"/>
+	<data format="pdf" name="region-frequencies" from_work_dir="region-frequencies.pdf" label="aCGH: 8 Plot ofRegion frequencies on ${on_string}"/>
+  </outputs>
+  
+  <help>
+  
+**What it does**
+
+Reduces dimensionality of called copy number data by identifying common breakpoints. Will also generate copy number aberration frequency plot for all samples.
+		
+  </help>
+</tool>

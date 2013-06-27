@@ -1,0 +1,23 @@
+<tool id="acgh22" name="22: Add cytogenetic bands" version="1">
+
+  <description>TODO</description> 
+
+  <command> 
+		
+  </command>
+
+  <outputs>
+	
+  </outputs>
+  
+  <inputs>
+	
+
+  </inputs>
+  
+  <help>
+  
+**What it does**
+		
+  </help>
+</tool>

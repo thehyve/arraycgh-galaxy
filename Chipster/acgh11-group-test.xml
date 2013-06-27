@@ -1,0 +1,68 @@
+<tool id="acgh11" name="11: Group tests for called copy number data" version="1">
+
+  <description>TESTED</description> 
+
+   <command> <!-- TODO: loc file instead of hardcoded! -->
+		Rscript /mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts/acgh11-group-test.R $scriptsdir $inputfile $phenodata $statistic $permutations $aberrations "$go.column" 2>&amp;1
+  </command>
+
+  <code file="getcolumnnames.py"/>
+  
+  <inputs>
+    <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
+
+	<param name="inputfile" type="data" label="Select input file (regions data)"/> 
+    <param name="phenodata" type="data" label="Select phenodata file "/>
+
+	<!-- <param name="column"     type="data_column"   data_ref="phenodata" multiple="False" label="Select Column"  help="Phenodata column describing the groups to test" /> -->
+    <conditional name="go">
+			<param name="ready" type="select"  label="Ready to select group column?"  help="Set to NO and back to YES after making changes to above parameters">
+				<option value="no" selected="True">no</option>
+				<option value="yes">yes</option>	
+			</param>
+			
+		<when value="yes">	
+				<param name="column"   type="select" dynamic_options="get_headers(phenodata)"  multiple="False" label="Select Groups Column"  help="Phenodata column describing the groups to test" /> 				
+   		</when>
+	</conditional> 
+
+
+	<param name="statistic" type="select" label="Test Statistic"  help="The test to use: either Chi-square, Wilcoxon, or Kruskal-Wallis.">
+		<option value="Chi-square"> Chi Squared </option>
+		<option value="Wilcoxon"> Wilcoxon </option>
+		<option value="KW"> Kruskal-Wallis </option>
+	</param>
+    
+	<param name="permutations" type="text" value="10000" label="Number of Permutations" help="The number of permutations. At least 10000 recommended for final calculations."/>	
+    <param name="aberrations" type="select" label="Test for aberrations" help="Whether to test only for gains or losses, or both.">
+		<option value="1"> Gains </option>
+		<option value="-1"> Losses </option>
+		<option value="0"> Both </option>
+	</param>	
+    
+	
+
+
+  </inputs>	
+
+  <outputs>
+	<data format="tabular" name="grouptest" from_work_dir="groups-test.tsv" label="aCGH: 11 Groups test on ${on_string}"/>
+	<data format="pdf" name="grouptestplot" from_work_dir="groups-test.pdf" label="aCGH: 11 Plot of Groups test on ${on_string}"/>
+
+  </outputs>
+  
+  <help>
+  
+**What it does**
+
+Statistical tests between two or more groups for called copy number data. The testing is recommended to be performed after running the *identify common regions from called copy number data* tool.
+
+Test Options
+  Chi-square: test for association between aberration pattern and group label; can also do multiple comparisons.
+
+  Wilcoxon: rank-sum test for two groups.
+
+  Kruskal-Wallis: test, generalization of Wilcoxon for more than 2 groups.
+
+  </help>
+</tool>

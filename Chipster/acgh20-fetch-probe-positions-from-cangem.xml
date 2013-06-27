@@ -1,0 +1,23 @@
+<tool id="acgh20" name="20: Fetch probe positions from CanGEM" version="1">
+
+  <description>TODO</description> 
+
+  <command> 
+		
+  </command>
+
+  <outputs>
+	
+  </outputs>
+  
+  <inputs>
+	
+
+  </inputs>
+  
+  <help>
+  
+**What it does**
+		
+  </help>
+</tool>

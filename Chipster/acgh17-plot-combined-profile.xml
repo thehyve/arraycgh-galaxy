@@ -1,0 +1,23 @@
+<tool id="acgh17" name="17: Plot profiles of matched copy number and expression" version="1">
+
+  <description>TODO</description> 
+
+  <command> 
+		
+  </command>
+
+  <outputs>
+	
+  </outputs>
+  
+  <inputs>
+	
+
+  </inputs>
+  
+  <help>
+  
+**What it does**
+		
+  </help>
+</tool>

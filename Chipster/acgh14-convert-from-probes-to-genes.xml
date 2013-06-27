@@ -1,0 +1,36 @@
+<tool id="acgh14" name="14: Detect genes from called copy number data" version="1">
+
+  <description>TODO</description> 
+
+  <command> 
+		
+  </command>
+
+ <code file="getcolumnnames.py"/>
+  
+  <inputs>
+	
+    <param name="phenodata" type="data" label="Select phenodata file "/>
+    <conditional name="go">
+			<param name="ready" type="select"  label="Ready to select column?"  help="Set to NO and back to YES after making changes to above parameters">
+				<option value="no" selected="True">no</option>
+				<option value="yes">yes</option>	
+			</param>
+			
+		<when value="yes">	
+				<param name="survivalcolumn"     type="select" dynamic_options="get_headers(phenodata)"  multiple="False" label="Select Survival Column"  help="Phenodata column with survival data  (TODO: display column names?)" /> 
+   		</when>
+	</conditional>
+
+  </inputs>
+  
+    <outputs>
+	
+  </outputs>
+
+  <help>
+  
+**What it does**
+		
+  </help>
+</tool>

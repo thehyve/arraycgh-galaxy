@@ -1,0 +1,44 @@
+<tool id="acgh1" name="1: import from GEO" version="1">
+
+ <description>TESTED</description> 
+
+  <command> <!-- TODO: loc file instead of hardcoded! -->
+		Rscript /mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts/acgh1-import-soft2.R $scriptsdir $accession $platform $chiptype 2>&amp;1
+  </command>
+
+  <inputs>
+    <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
+
+	<param name="accession" type="text" value="GSE"   label="Accession" help="Enter GDS or GSE number of experiment"/>
+    <param name="platform"  type="text" value="GPL"   label="Platform"  help="In case the series contains multiple platforms, specify the accession number of the platform to import"/>
+    <param name="chiptype"  type="text" value="other" label="Affymetrix/Illumina chip type" help="Enter platform type, either Affymetrix, Illumina, or cDNA for all other platforms"/> 
+  
+  </inputs>	
+
+  <outputs>
+	<data format="tabular" name="normalized" from_work_dir="normalized.tsv" label="aCGH: 1 Normalized.tsv (GEO import) on ${on_string}"/>
+	<data format="tabular" name="phenodata" from_work_dir="phenodata.tsv" label="aCGH: 1  Phenodata.tsv (GEO import) on ${on_string}"/>
+  </outputs>
+  
+ 
+  
+  <help>
+**What it Does**  
+
+   Import a data set directly from GEO. Be sure to specify the chiptype as an Affymetrix chip name, or either Illumina or cDNA
+
+**R Reference**::
+
+# TOOL import-soft2.R: "Import from GEO" (Import a data set directly from GEO. Be sure to specify the chiptype as an Affymetrix chip name, or either Illumina or cDNA.)
+# OUTPUT normalized.tsv: normalized.tsv 
+# OUTPUT META phenodata.tsv: phenodata.tsv 
+# PARAMETER GDS.name: accession TYPE STRING DEFAULT GSE (GDS or GSE number of the experiment.)
+# PARAMETER platform: platform TYPE STRING DEFAULT GPL (In case the series contains multiple platforms, specify the accession of the platform to import. If there is just one, this platform is ignored.)
+# PARAMETER chiptype: "Affymetrix/Illumina chiptype" TYPE STRING DEFAULT other (If the microarray platform used is an Affymetrix one, the name of the Bioconductor annotation package. For Illumina arrays, fill in Illumina. For everything else, either cDNA or other.)
+#
+# 2013-03-18
+# Ilari Scheinin 
+# JTT 9.8.2007
+		
+  </help>
+</tool>

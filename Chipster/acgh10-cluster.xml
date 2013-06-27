@@ -1,0 +1,49 @@
+<tool id="acgh10" name="10: Cluster called copy number data" version="1">
+
+  <description>TESTED</description> 
+
+   <command> <!-- TODO: loc file instead of hardcoded! -->
+		Rscript /mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts/acgh10-cluster.R $scriptsdir $inputfile $phenodata $calltypes "$go.column" 2>&amp;1
+  </command>
+
+  <code file="getcolumnnames.py"/>
+
+  <inputs>
+    <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
+
+	<param name="inputfile" type="data" label="Select input file (regions data)"/> 
+    <param name="phenodata" type="data" label="Select phenodata file "/>
+
+	<!-- <param name="column"     type="data_column"   data_ref="phenodata" multiple="False" label="Select Column"  help="Phenodata column to include in the output plot. Assigned groups will be marked in the resulting dendogram" /> -->
+    <conditional name="go">
+			<param name="ready" type="select"  label="Ready to select column?"  help="Set to NO and back to YES after making changes to above parameters">
+				<option value="no" selected="True">no</option>
+				<option value="yes">yes</option>	
+			</param>
+			
+		<when value="yes">	
+				<param name="column"   type="select" dynamic_options="get_headers(phenodata)"  multiple="False" label="Select Groups Column"  help="Phenodata column to include in the output plot. Assigned groups will be marked in the resulting dendogram." /> 				
+   		</when>
+	</conditional>
+ 
+	<param name="calltypes" type="select" label="Type of Calls"  help="Whether to cluster the arrays based on soft or hard calls. Hard calls are losses, normals, and gains, whereas soft calls refer to the respective probabilities of these calls. The preferred choice is to use soft calls whenever they are available.">
+		<option value="soft"> Soft </option>
+		<option value="hard"> Hard </option>
+	</param>
+    
+
+  </inputs>	
+
+  <outputs>
+	
+	<data format="pdf" name="wecca" from_work_dir="wecca.pdf" label="aCGH: 10 Clustering on ${on_string}"/>
+  </outputs>
+  
+  <help>
+  
+**What it does**
+
+Perform clustering of copy number data. Unsupervised hierarchical clustering according to weighted clustering of called arrayCGH data (WECCA) will be performed.
+		
+  </help>
+</tool>

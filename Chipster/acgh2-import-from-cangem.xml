@@ -1,0 +1,70 @@
+<tool id="acgh2" name="2: import from CanGEM" version="1">
+
+  <description>TODO</description> 
+
+    <command> <!-- TODO: loc file instead of hardcoded! -->
+		Rscript /mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts/acgh2-import-from-cangem.R $scriptsdir $accession 2>&amp;1
+  </command>
+
+  <inputs>
+    <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
+
+	# PARAMETER accession: accession TYPE STRING DEFAULT CG- (Accession of either a data set, an experiment, a series, or single microarray results.)
+	<param name="accession" type="text" value="GCG-"   label="Accession" help="Accession of either a data set, an experiment, a series, or single microarray results."/>
+
+# PARAMETER username: username TYPE STRING DEFAULT empty (Username, in case the data is password-protected. WARNING: This will store your username password in the Chipster history files. To avoid this, use the session parameter.)
+	<param name="username" type="text" value=""   label="Username" help="Username, in case the data is password-protected."/>
+# PARAMETER password: password TYPE STRING DEFAULT empty (Password, in case the data is password-protected. WARNING: This will store your username password in the Chipster history files. To avoid this, use the session parameter.)
+	<param name="password" type="text" value=""   label="Password" help="Password, in case the data is password-protected."/>
+
+# PARAMETER agilent.filtering: agilent.filtering TYPE [yes: yes, no: no] DEFAULT yes (Whether to filter outliers from Agilent 2-color arrays. Will be ignored, if downloaded files are 1-color arrays, or not in Agilent file format. Check the help file for details about the filtering function.)
+	<param name="agilentfiltering" type="select" label="filter outliers from Agilent 2-color arrays?" help="Will be ignored, if downloaded files are 1-color arrays, or not in Agilent file format.">
+		<option value="yes"> Yes </option>
+		<option value="no"> No </option>	
+	</param>	
+
+# PARAMETER background.treatment: background.treatment TYPE [none: none, subtract: subtract, normexp: normexp, rma: rma] DEFAULT normexp (Background treatment method. RMA is available only for one-color arrays.)
+	<param name="backgroundtreatment" type="select" label="Background treatment method" help="RMA is available only for one-color arrays.">
+		<option value="none"> None </option>
+		<option value="subtract"> Subtract </option>
+		<option value="normexp" selecte="true"> Normexp </option>
+		<option value="rma"> RMA </option>
+	</param>	
+
+# PARAMETER background.offset: background.offset TYPE [0: 0, 50: 50] DEFAULT 50 (Background offset.)
+# PARAMETER intra.array.normalization: intra.array.normalization TYPE [none: none, median: median, loess: loess] DEFAULT loess (Intra-array normalization method for Agilent arrays. Will be ignored, if downloaded files are not in Agilent file format.)
+# PARAMETER inter.array.normalization: inter.array.normalization TYPE [none: none, quantile: quantile, scale: scale] DEFAULT none (Inter-array normalization method for Agilent arrays. Will be ignored, if downloaded files are not in Agilent file format.)
+# PARAMETER affymetrix.normalization: affymetrix.normalization TYPE [gcrma: gcrma, rma: rma, mas5: mas5] DEFAULT gcrma (Normalization method for Affymetrix arrays. Will be ignored, if downloaded files are not in Affymetrix file format.)
+# PARAMETER genome.build: genome.build TYPE [none: none, GRCh37: GRCh37, NCBI36: NCBI36, NCBI35: NCBI35, NCBI34: NCBI34] DEFAULT GRCh37 (The genome build to use. GRCh37 = hg19, NCBI36 = hg18, NCBI35 = hg17, NCBI34 = hg16.)
+
+
+
+	<param name="inputfile" type="data" label="Select input file (survival test)"/> 
+    <param name="phenodata" type="data" label="Select phenodata file "/>
+    <param name="survivalcolumn"     type="data_column"   data_ref="phenodata" multiple="False" label="Select Survival Column"  help="Phenodata column with survival data  (TODO: display column names?)" /> 
+    <param name="statuscolumn"     type="data_column"   data_ref="phenodata" multiple="False" label="Select Status Column"  help="Phenodata column with patient status: alive=0, dead=1  (TODO: display column names?)" />   
+
+	 <param name="aberrations" type="select" label="Test for aberrations" help="Whether to test only for gains or losses, or both.">
+		<option value="1"> Gains </option>
+		<option value="-1"> Losses </option>
+		<option value="0"> Both </option>
+	</param>	
+	<param name="cintervals" type="select" label="Plot confidence intervals?" >
+		<option value="yes"> Yes </option>
+		<option value="no"> No </option>	
+	</param>	
+
+  </inputs>	
+
+  <outputs>
+	<data format="tabular" name="normalized" from_work_dir="normalized.tsv" label="aCGH: 2 Normalized.tsv (CanGem import) on ${on_string}"/>
+	<data format="tabular" name="phenodata" from_work_dir="phenodata.tsv" label="aCGH: 2  Phenodata.tsv (CanGem import) on ${on_string}"/>
+
+  </outputs>
+  
+  <help>
+  
+**What it does**
+		
+  </help>
+</tool>

@@ -1,0 +1,42 @@
+<tool id="acgh6" name="6: Segment copy number data" version="1">
+
+  <description>TESTED</description> 
+
+  <command> <!-- TODO: loc file instead of hardcoded! -->
+		Rscript /mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts/acgh6-segment.R $scriptsdir $inputfile $numchr $normalisation $mpps $mnsbs 2>&amp;1
+  </command>
+
+  <inputs>
+    <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
+
+	<param name="inputfile" type="data" label="Select input file)"/>
+	<param name="numchr" type="integer" value="23" label="Number of Chromosomes" help="Number of chromosomes. Usually 23 for sex-matched reference samples and 22 otherwise."/>
+    <param name="normalisation" type="select" label="Normalisation method">
+		<option value="none"> None </option>
+		<option value="mode"> Mode </option>
+		<option value="median"> Median </option>	
+	</param>
+    <param name="mpps" type="select" label="Minimum number of probes per segment">
+		<option value="2"> 2 </option>
+		<option value="3"> 3 </option>
+		<option value="4"> 4 </option>	
+		<option value="5"> 5 </option>	
+	</param>
+    <param name="mnsbs" type="text" value="0.0" label="Minimum number of sds between segments"/>
+  
+  </inputs>	
+
+  <outputs>
+	<data format="tabular" name="segmented" from_work_dir="segmented.tsv" label="aCGH: 6 Segmentation on ${on_string}"/>
+  </outputs>
+  
+ 
+  
+  <help>
+**What it does** 
+ 
+Segment copy number data before calling aberrations
+
+
+  </help>
+</tool>

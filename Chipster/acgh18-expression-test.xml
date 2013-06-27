@@ -1,0 +1,23 @@
+<tool id="acgh18" name="18: Tet for copy-number-induced expression changes" version="1">
+
+  <description>TODO</description> 
+
+  <command> 
+		
+  </command>
+
+  <outputs>
+	
+  </outputs>
+  
+  <inputs>
+	
+
+  </inputs>
+  
+  <help>
+  
+**What it does**
+		
+  </help>
+</tool>

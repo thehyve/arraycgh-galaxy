@@ -1,0 +1,31 @@
+<tool id="acgh4" name="4: Plot copy number profiles" version="1">
+
+  <description>TESTED</description> 
+
+  <command> <!-- TODO: loc file instead of hardcoded! -->
+		Rscript /mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts/acgh4-plot-profile.R $scriptsdir $inputfile $phenodata $samples $chromosomes $resolution  2>&amp;1
+  </command>
+
+  <inputs>
+    <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
+
+	<param name="inputfile" type="data" label="Select input file (aberrations data)"/>
+	<param name="phenodata" type="data" label="Select phenodata file "/>
+	
+
+	<param name="samples"     type="text" value="1" label="Samples"      help="The numbers of the samples to be plotted, separated by commas. 0 means all samples will be plotted. Ranges are also supported (e.g. 1,3,7-10\)."/>
+    <param name="chromosomes" type="text" value="0" label="Chromosomes"  help="The numbers of the chromosomes to be plotted, separated by commas. 0 means all chromosomes. Ranges are also supported (e.g. 1,3,7-10\)."/>
+    <param name="resolution"  type="text" value="0.1" label="Resolution" help="Proportion of log-ratio data points to draw. Lower values lead to smaller file sizes and faster processing."/>
+     
+  </inputs>	
+
+  <outputs>
+	<data format="pdf" name="cgh-profile" from_work_dir="cgh-profile.pdf" label="aCGH: 4 Plot of Copynumber profile on ${on_string}"/>
+  </outputs>
+  
+  <help>
+  
+**What it does**
+Plot copy number profiles of individual samples.		
+  </help>
+</tool>

@@ -1,0 +1,32 @@
+<tool id="acgh3" name="3: Normalize copy number data" version="1">
+
+  <description>TOTEST</description> 
+
+  <command> <!-- TODO: loc file instead of hardcoded! -->
+		Rscript /mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts/acgh3-normalize.R $scriptsdir $inputfile $numchr $normalisation 2>&amp;1
+  </command>
+
+  <inputs>
+    <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
+
+	<param name="inputfile" type="data" label="Select input file (raw data)"/>
+	<param name="numchr" type="integer" value="23" label="Number of Chromosomes" help="Number of chromosomes. Usually 23 for sex-matched reference samples and 22 otherwise."/>
+    <param name="normalisation" type="select" label="Normalisation method">
+		<option value="none"> None </option>
+		<option value="mode"> Mode </option>
+		<option value="median"> Median </option>	
+	</param>
+     
+  </inputs>	
+
+  <outputs>
+	<data format="tabular" name="normalized" from_work_dir="normalized.tsv" label="aCGH: 3 Normalization on ${on_string}"/>
+  </outputs>
+  
+  <help>
+  
+**What it does**
+Normalize copy number data before segmentation
+		
+  </help>
+</tool>

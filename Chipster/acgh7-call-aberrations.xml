@@ -1,0 +1,41 @@
+<tool id="acgh7" name="7: Call aberrations from segmented copy number data" version="1">
+
+  <description>TESTED</description> 
+
+ <command> <!-- TODO: loc file instead of hardcoded! -->
+		Rscript /mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts/acgh7-call-aberrations.R $scriptsdir $inputfile $copynumberstates $organism $genomebuild 2>&amp;1
+  </command>
+
+  <inputs>
+    <param name="scriptsdir" type="hidden" value="/mnt/galaxyTools/galaxy-central/tools/trait/Chipster/Rscripts"/>
+
+	<param name="inputfile" type="data" label="Select input file (segmented data)"/>
+	<param name="copynumberstates" type="select" label="Number of copy number states" help="3 states means calling of loss, normal and gain, while 4 states means calling of loss, normal, gain and amplification.">
+		<option value="3"> 3 </option>
+		<option value="4"> 4 </option>
+	</param>
+    <param name="organism" type="select" label="Organism">
+		<option value="human"> human </option>
+		<option value="other"> other </option>
+	</param>
+    <param name="genomebuild" type="select" label="Genome Build">
+		<option value="GRCh37"> GRCh37 </option>
+		<option value="NCBI36"> NCBI36 </option>
+		<option value="NCBI35"> NCBI35 </option>	
+        <option value="NCBI34"> NCBI34 </option>	
+	</param>
+     
+  </inputs>	
+
+  <outputs>
+	<data format="tabular" name="aberrations"            from_work_dir="aberrations.tsv" label="aCGH: 7 Aberrations on ${on_string}"/>
+	<data format="pdf" name="aberration-frequencies" from_work_dir="aberration-frequencies.pdf" label="aCGH: 7 Plot of Aberration frequencies on ${on_string}"/>
+  </outputs>
+  
+  <help>
+  
+**What it does**
+
+Call copy number aberrations from aCGH log ratios.		
+  </help>
+</tool>
